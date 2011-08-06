@@ -46,14 +46,11 @@ import com.cloudera.flume.handlers.exec.ExecNioSource;
 import com.cloudera.flume.handlers.hdfs.SeqfileEventSource;
 import com.cloudera.flume.handlers.irc.IrcSource;
 import com.cloudera.flume.handlers.rpc.RpcSource;
-import com.cloudera.flume.handlers.scribe.ScribeEventSource;
 import com.cloudera.flume.handlers.syslog.SyslogTcpSource;
 import com.cloudera.flume.handlers.syslog.SyslogTcpSourceThreads;
 import com.cloudera.flume.handlers.syslog.SyslogUdpSource;
 import com.cloudera.flume.handlers.text.TailDirSource;
 import com.cloudera.flume.handlers.text.TailSource;
-import com.cloudera.flume.handlers.thrift.PrioritizedThriftEventSource;
-import com.cloudera.flume.handlers.thrift.ThriftEventSource;
 import com.cloudera.flume.handlers.twitter.TwitterStreamSource;
 import com.cloudera.util.Pair;
 
@@ -78,7 +75,6 @@ public class SourceFactoryImpl extends SourceFactory {
 
       // creates AvroEventSource or ThriftEventSource
       { "rpcSource", RpcSource.builder() },
-      { "thriftSource", ThriftEventSource.builder() },
       { "avroSource", AvroEventSource.builder() },
       { "text", TextFileSource.builder() },
       { "tail", TailSource.builder() },
@@ -96,15 +92,12 @@ public class SourceFactoryImpl extends SourceFactory {
       { "nonlsynth", NoNlSynthSource.builder() },
       { "asciisynth", NoNlASCIISynthSource.builder() },
       { "synthrndsize", SynthSourceRndSize.builder() },
-      { "scribe", ScribeEventSource.builder() },
       { "report", PollingSource.reporterPollBuilder() },
 
       // fun but unsupported officially.
       { "twitter", TwitterStreamSource.builder() },
       { "irc", IrcSource.builder() },
 
-      // experimental / Cloudera SA only.
-      { "tpriosource", PrioritizedThriftEventSource.builder() },
 
       // TODO (jon) deprecate these, use format, make arg to
       // text/tail/console

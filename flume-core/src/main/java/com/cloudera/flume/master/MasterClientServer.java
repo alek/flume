@@ -58,8 +58,6 @@ public class MasterClientServer {
     masterRPC = null;
     if (FlumeConfiguration.RPC_TYPE_AVRO.equals(rpcType)) {
       masterRPC = new MasterClientServerAvro(this);
-    } else if (FlumeConfiguration.RPC_TYPE_THRIFT.equals(rpcType)) {
-      masterRPC = new MasterClientServerThrift(this);
     } else {
       throw new IOException("No valid RPC framework specified in config");
     }

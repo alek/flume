@@ -20,7 +20,6 @@ package com.cloudera.flume.master;
 import java.io.File;
 import java.io.IOException;
 
-import org.apache.thrift.transport.TTransportException;
 import org.junit.After;
 import org.junit.Before;
 
@@ -38,7 +37,7 @@ public class SetupMasterTestEnv {
   private File tmpdir = null;
 
   @Before
-  public void setCfgAndStartMaster() throws TTransportException, IOException {
+  public void setCfgAndStartMaster() throws IOException {
     // Give ZK a temporary directory, otherwise it's possible we'll reload some
     // old configs
     tmpdir = FileUtil.mktempdir();

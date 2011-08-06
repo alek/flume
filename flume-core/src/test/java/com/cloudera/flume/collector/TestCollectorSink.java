@@ -69,8 +69,6 @@ import com.cloudera.flume.handlers.hdfs.EscapedCustomDfsSink;
 import com.cloudera.flume.handlers.rolling.ProcessTagger;
 import com.cloudera.flume.handlers.rolling.RollSink;
 import com.cloudera.flume.handlers.rolling.Tagger;
-import com.cloudera.flume.handlers.thrift.Priority;
-import com.cloudera.flume.handlers.thrift.ThriftFlumeEvent;
 import com.cloudera.flume.reporter.ReportEvent;
 import com.cloudera.flume.reporter.ReportManager;
 import com.cloudera.util.FlumeTestHarness;

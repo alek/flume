@@ -27,7 +27,6 @@ import org.apache.avro.AvroRemoteException;
 import org.apache.avro.ipc.HttpServer;
 import org.apache.avro.ipc.Server;
 import org.apache.avro.ipc.specific.SpecificResponder;
-import org.apache.thrift.transport.TTransportException;
 import org.junit.Test;
 import org.mortbay.log.Log;
 import org.slf4j.Logger;
@@ -125,7 +124,7 @@ public class TestAvroMultiMasterRPC {
    * Tries to connect to several servers in turn and compensate as masters fail.
    */
   @Test
-  public void testConnect() throws TTransportException, IOException,
+  public void testConnect() throws IOException,
       InterruptedException {
     FlumeConfiguration conf = FlumeConfiguration.get();
     conf.set(FlumeConfiguration.MASTER_HEARTBEAT_SERVERS,

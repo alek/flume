@@ -28,7 +28,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.thrift.TException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -46,7 +45,7 @@ import com.cloudera.util.NetUtils;
 
 /**
  * Tests the logic behind the MasterClientServer class. RPC-specific type
- * conversion is already covered in TestRPCMechanisms, so we don't test that
+ * conversion is already covered in TestAvroRPC, so we don't test that
  * here.
 */
 public class TestMasterServers {
@@ -77,7 +76,7 @@ public class TestMasterServers {
   }
 
   @Test
-  public void testMasterClientServerThrift() throws TException, IOException {
+  public void testMasterClientServerThrift() throws IOException {
     master = new FlumeMaster(cfg);
     master.serve();
     MasterClientServer delegate = new MasterClientServer(master, cfg);
@@ -109,7 +108,7 @@ public class TestMasterServers {
   }
 
   @Test
-  public void testMasterAdminServer() throws TException, IOException,
+  public void testMasterAdminServer() throws IOException,
       FlumeSpecException {
     master = new FlumeMaster(cfg);
     master.serve();
@@ -179,7 +178,7 @@ public class TestMasterServers {
   }
   
   @Test
-  public void testReports() throws TException, IOException {
+  public void testReports() throws IOException {
     FlumeConfiguration.createTestableConfiguration();
     ReportManager rptMan = ReportManager.get();
     rptMan.clear();

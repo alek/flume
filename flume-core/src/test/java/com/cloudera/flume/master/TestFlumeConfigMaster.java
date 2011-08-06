@@ -27,7 +27,6 @@ import java.io.IOException;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.apache.thrift.transport.TTransportException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -63,6 +62,7 @@ public class TestFlumeConfigMaster {
 
   @After
   public void deleteConfigDir() throws IOException {
+
     if (tmpdir != null) {
       FileUtil.rmr(tmpdir);
       tmpdir = null;
@@ -108,7 +108,7 @@ public class TestFlumeConfigMaster {
   }
 
   @Test
-  public void testOpenClose() throws TTransportException, IOException {
+  public void testOpenClose() throws IOException {
 
     FlumeMaster fm = new FlumeMaster(new CommandManager(), new ConfigManager(),
         new StatusManager(), new MasterAckManager(), cfg);
@@ -125,7 +125,7 @@ public class TestFlumeConfigMaster {
    * Test open and close with gossip ack manager being used
    */
   @Test
-  public void testGossipOpenClose() throws TTransportException, IOException {
+  public void testGossipOpenClose() throws IOException {
     FlumeMaster fm = new FlumeMaster(cfg, false);
 
     // TODO (henry) make the GossipAckManager shutdown cleanly.

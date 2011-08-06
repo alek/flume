@@ -38,12 +38,6 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.cli.PosixParser;
-import org.apache.thrift.TException;
-import org.apache.thrift.protocol.TBinaryProtocol;
-import org.apache.thrift.protocol.TProtocol;
-import org.apache.thrift.transport.TSocket;
-import org.apache.thrift.transport.TTransport;
-import org.apache.thrift.transport.TTransportException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -53,8 +47,6 @@ import com.cloudera.flume.conf.FlumeConfiguration;
 import com.cloudera.flume.master.Command;
 import com.cloudera.flume.master.CommandStatus;
 import com.cloudera.flume.master.StatusManager;
-import com.cloudera.flume.reporter.server.thrift.ThriftFlumeReport;
-import com.cloudera.flume.reporter.server.thrift.ThriftFlumeReportServer;
 import com.cloudera.flume.shell.CommandBuilder;
 import com.cloudera.util.CheckJavaVersion;
 
@@ -175,7 +167,7 @@ public class FlumeShell {
   }
 
   protected AdminRPC client = null;
-  protected ThriftFlumeReportServer.Client reportClient = null;
+//  protected ThriftFlumeReportServer.Client reportClient = null;
   public static final long CMD_WAIT_TIME_MS = 10 * 1000;
 
   protected static class FlumeCompletor implements Completor {
@@ -550,23 +542,23 @@ public class FlumeShell {
       return 0;
     }
 
-    if (cmd.getCommand().equals("getreports")) {
-      Map<String, ThriftFlumeReport> reports;
-      try {
-        reports = reportClient.getAllReports();
-      } catch (TException e) {
-        LOG.debug("Disconnected!", e);
-        disconnect();
-        return -1;
-      }
-      System.out.println("Master knows about " + reports.size() + " reports");
-
-      for (Entry<String, ThriftFlumeReport> e : reports.entrySet()) {
-        System.out.println("\t" + e.getKey() + " --> "
-            + e.getValue().toString());
-      }
-      return 0;
-    }
+//    if (cmd.getCommand().equals("getreports")) {
+//      Map<String, ThriftFlumeReport> reports;
+//      try {
+//        reports = reportClient.getAllReports();
+//      } catch (TException e) {
+//        LOG.debug("Disconnected!", e);
+//        disconnect();
+//        return -1;
+//      }
+//      System.out.println("Master knows about " + reports.size() + " reports");
+//
+////      for (Entry<String, ThriftFlumeReport> e : reports.entrySet()) {
+////        System.out.println("\t" + e.getKey() + " --> "
+////            + e.getValue().toString());
+////      }
+//      return 0;
+//    }
 
     if (cmd.getCommand().equals("getmappings")) {
       Map<String, List<String>> mappings;
@@ -657,7 +649,7 @@ public class FlumeShell {
             LOG.debug("Connection to " + s + " failed", e);
           }
           return 0;
-        } catch (TTransportException t) {
+        } catch (Exception t) {
           System.out.println("Connection to " + s + " failed");
           LOG.debug("Connection to " + s + " failed", t);
         }
@@ -850,16 +842,15 @@ public class FlumeShell {
             : "(disconnected)") + "] ";
   }
 
-  private ThriftFlumeReportServer.Client connectReportClient(String host,
-      int port) throws TTransportException {
-    TTransport masterTransport = new TSocket(host, port);
-    TProtocol protocol = new TBinaryProtocol(masterTransport);
-    masterTransport.open();
-    return new ThriftFlumeReportServer.Client(protocol);
-  }
+//  private ThriftFlumeReportServer.Client connectReportClient(String host,
+//      int port) throws TTransportException {
+//    TTransport masterTransport = new TSocket(host, port);
+//    TProtocol protocol = new TBinaryProtocol(masterTransport);
+//    masterTransport.open();
+//    return new ThriftFlumeReportServer.Client(protocol);
+//  }
 
-  protected void connect(String host, int aPort, int rPort) throws IOException,
-      TTransportException {
+  protected void connect(String host, int aPort, int rPort) throws IOException {
     connected = false;
     System.out.println("Connecting to Flume master " + host + ":" + aPort + ":"
         + rPort + "...");
@@ -868,13 +859,13 @@ public class FlumeShell {
     if (FlumeConfiguration.RPC_TYPE_AVRO.equals(rpcType)) {
       client = new AdminRPCAvro(host, aPort);
     } else if (FlumeConfiguration.RPC_TYPE_THRIFT.equals(rpcType)) {
-      client = new AdminRPCThrift(host, aPort);
+//      client = new AdminRPCThrift(host, aPort);
     } else {
       throw new IOException("No valid RPC framework specified in config");
     }
 
     // use default for now
-    reportClient = connectReportClient(host, rPort);
+//    reportClient = connectReportClient(host, rPort);
 
     curhost = host;
     curAPort = aPort;
@@ -882,7 +873,7 @@ public class FlumeShell {
     connected = true;
   }
 
-  public void run() throws IOException, TTransportException {
+  public void run() throws IOException {
     ConsoleReader cReader = new ConsoleReader();
     cReader.addCompletor(new FlumeCompletor());
 
@@ -900,8 +891,7 @@ public class FlumeShell {
    * Args are optional - the first arg is the host:port for the master to
    * connect to
    */
-  public static void main(String[] args) throws IOException,
-      TTransportException {
+  public static void main(String[] args) throws IOException {
     // Make sure the Java version is not older than 1.6
     if (!CheckJavaVersion.isVersionOk()) {
       LOG

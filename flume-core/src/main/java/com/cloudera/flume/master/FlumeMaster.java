@@ -34,7 +34,6 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.cli.PosixParser;
-import org.apache.thrift.transport.TTransportException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -48,7 +47,6 @@ import com.cloudera.flume.reporter.ReportManager;
 import com.cloudera.flume.reporter.ReportUtil;
 import com.cloudera.flume.reporter.Reportable;
 import com.cloudera.flume.reporter.server.AvroReportServer;
-import com.cloudera.flume.reporter.server.ThriftReportServer;
 import com.cloudera.flume.util.FlumeVMInfo;
 import com.cloudera.flume.util.SystemInfo;
 import com.cloudera.util.CheckJavaVersion;
@@ -82,7 +80,6 @@ public class FlumeMaster implements Reportable {
    * start the one defined by the flag flume.report.server.rpc.type in the
    * configuration file.
    */
-  ThriftReportServer thriftReportServer = null;
   AvroReportServer avroReportServer = null;
   InternalHttpServer http = null;
 
@@ -271,8 +268,8 @@ public class FlumeMaster implements Reportable {
      */
     avroReportServer = new AvroReportServer(FlumeConfiguration.get()
         .getReportServerPort());
-    thriftReportServer = new ThriftReportServer(FlumeConfiguration.get()
-        .getReportServerPort());
+//    thriftReportServer = new ThriftReportServer(FlumeConfiguration.get()
+//        .getReportServerPort());
 
     ReportManager.get().add(this);
     try {
@@ -285,9 +282,9 @@ public class FlumeMaster implements Reportable {
       if (cfg.getReportServerRPC() == FlumeConfiguration.RPC_TYPE_AVRO) {
         avroReportServer.serve();
       } else {
-        thriftReportServer.serve();
+//        thriftReportServer.serve();
       }
-    } catch (TTransportException e1) {
+    } catch (Exception e1) {
       throw new IOException("Error starting control or config server", e1);
     }
     cmdman.start();
@@ -350,10 +347,10 @@ public class FlumeMaster implements Reportable {
           avroReportServer = null;
         }
       } else {
-        if (thriftReportServer != null) {
-          thriftReportServer.stop();
-          thriftReportServer = null;
-        }
+//        if (thriftReportServer != null) {
+//          thriftReportServer.stop();
+//          thriftReportServer = null;
+//        }
       }
       specman.stop();
 

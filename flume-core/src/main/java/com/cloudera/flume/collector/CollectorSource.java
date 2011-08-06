@@ -20,6 +20,7 @@ package com.cloudera.flume.collector;
 import java.io.IOException;
 import java.util.Map;
 
+import com.cloudera.flume.handlers.avro.AvroEventSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,7 +29,6 @@ import com.cloudera.flume.conf.FlumeConfiguration;
 import com.cloudera.flume.conf.SourceFactory.SourceBuilder;
 import com.cloudera.flume.core.Event;
 import com.cloudera.flume.core.EventSource;
-import com.cloudera.flume.handlers.thrift.ThriftEventSource;
 import com.cloudera.flume.reporter.ReportEvent;
 import com.google.common.base.Preconditions;
 
@@ -51,7 +51,7 @@ public class CollectorSource extends EventSource.Base {
   int port;
 
   public CollectorSource(int port) {
-    this.src = new ThriftEventSource(port);
+    this.src = new AvroEventSource(port);
     this.port = port;
   }
 

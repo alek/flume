@@ -26,7 +26,6 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.apache.thrift.transport.TTransportException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -69,7 +68,7 @@ public class TestMasterAutoUpdatesE2E {
    * process/jvm.
    * */
   @Before
-  public void setCfgAndStartMaster() throws TTransportException, IOException,
+  public void setCfgAndStartMaster() throws IOException,
       FlumeSpecException {
     // Give ZK a temporary directory, otherwise it's possible we'll reload some
     // old configs

@@ -159,111 +159,10 @@ public class TestAvroRPC {
     }
   }
 
-//  /**
-//   * Mock ThriftServer.
-//   */
-//  public class MockThriftServer extends ThriftServer implements
-//      ThriftFlumeClientServer.Iface {
-//
-//    @Override
-//    public void acknowledge(String ackid) throws TException {
-//    }
-//
-//    @Override
-//    public boolean checkAck(String ackid) throws TException {
-//      Log.info("checkAck called at server on " + this.port);
-//      return true;
-//    }
-//
-//    @Override
-//    public ThriftFlumeConfigData getConfig(String sourceId) throws TException {
-//      Log.info("getConfig called at server on " + this.port);
-//      FlumeConfigData out = new FlumeConfigData();
-//      out.flowID = "flowID";
-//      out.sinkConfig = "sinkConfig";
-//      out.sinkVersion = 112233;
-//      out.sourceConfig = "sourceConfig";
-//      out.sourceVersion = 445566;
-//      out.timestamp = 78901;
-//      return MasterClientServerThrift.configToThrift(out);
-//    }
-//
-//    @Override
-//    public List<String> getLogicalNodes(String physNode) throws TException {
-//      Log.info("getLogicalNodes called at server on " + this.port);
-//      List<String> out = new LinkedList<String>();
-//      out.add("one");
-//      out.add("two");
-//      out.add("three");
-//      out.add("four");
-//      return out;
-//    }
-//
-//    @Override
-//    public boolean heartbeat(String logicalNode, String physicalNode,
-//        String host, com.cloudera.flume.conf.thrift.FlumeNodeState s,
-//        long timestamp) throws TException {
-//      Log.info("heartbeat called at server on " + this.port);
-//      return true;
-//    }
-//
-//    @Override
-//    public void putReports(Map<String, ThriftFlumeReport> reports)
-//        throws TException {
-//      Log.info("putReports called at server on " + this.port);
-//      assertEquals(1, reports.size());
-//      ThriftFlumeReport report = reports.get("reportKey");
-//      assertNotNull(report);
-//
-//      Map<String, Long> longMetrics = report.longMetrics;
-//      assertEquals(2, longMetrics.size());
-//
-//      assertEquals(Long.MIN_VALUE,
-//          ((Long) longMetrics.get("long1")).longValue());
-//      assertEquals(Long.MAX_VALUE,
-//          ((Long) longMetrics.get("long2")).longValue());
-//
-//      Map<String, Double> doubleMetrics = report.doubleMetrics;
-//      assertEquals(2, doubleMetrics.size());
-//
-//      assertEquals(Double.MIN_VALUE,
-//          ((Double) doubleMetrics.get("double1")).doubleValue(), .0001);
-//      assertEquals(Double.MAX_VALUE,
-//          ((Double) doubleMetrics.get("double2")).doubleValue(), .0001);
-//
-//      Map<String, String> stringMetrics = report.stringMetrics;
-//      assertEquals(2, stringMetrics.size());
-//      assertEquals("string1", stringMetrics.get("string1").toString());
-//      assertEquals("string2", stringMetrics.get("string2").toString());
-//    }
-//
-//    public void setPort(int port) {
-//      this.port = port;
-//    }
-//
-//    public void serve() throws IOException {
-//      LOG.info(String
-//          .format(
-//              "Starting blocking thread pool server for control server on port %d...",
-//              port));
-//      try {
-//        this.start(new ThriftFlumeClientServer.Processor((Iface) this), port,
-//            "MasterClientServer");
-//      } catch (TTransportException e) {
-//        throw new IOException(e.getMessage());
-//      }
-//    }
-
-//    @Override
-//    public Map<String, Integer> getChokeMap(String physNode) throws TException {
-//      return null;
-//    }
-//  }
-
   /**
    * Connect to stub server and make sure types are converted correctly.
    * 
-   * We test both Avro and Thrift version of the client/server interaction.
+   * We test Avro version of the client/server interaction.
    * 
    * @throws IOException
    */
@@ -325,39 +224,6 @@ public class TestAvroRPC {
 
   @Test
   public void testTypeConversions() {
-    // THRIFT NODE STATE
-//    assertEquals(
-//        StatusManager.NodeState.HELLO,
-//        MasterClientServerThrift
-//            .stateFromThrift(com.cloudera.flume.conf.thrift.FlumeNodeState.HELLO));
-//    assertEquals(
-//        StatusManager.NodeState.ACTIVE,
-//        MasterClientServerThrift
-//            .stateFromThrift(com.cloudera.flume.conf.thrift.FlumeNodeState.ACTIVE));
-//    assertEquals(
-//        StatusManager.NodeState.ERROR,
-//        MasterClientServerThrift
-//            .stateFromThrift(com.cloudera.flume.conf.thrift.FlumeNodeState.ERROR));
-//    assertEquals(
-//        StatusManager.NodeState.IDLE,
-//        MasterClientServerThrift
-//            .stateFromThrift(com.cloudera.flume.conf.thrift.FlumeNodeState.IDLE));
-//    assertEquals(
-//        StatusManager.NodeState.OPENING,
-//        MasterClientServerThrift
-//            .stateFromThrift(com.cloudera.flume.conf.thrift.FlumeNodeState.CONFIGURING));
-//
-//    assertEquals(com.cloudera.flume.conf.thrift.FlumeNodeState.HELLO,
-//        MasterClientServerThrift.stateToThrift(StatusManager.NodeState.HELLO));
-//    assertEquals(com.cloudera.flume.conf.thrift.FlumeNodeState.ACTIVE,
-//        MasterClientServerThrift.stateToThrift(StatusManager.NodeState.ACTIVE));
-//    assertEquals(com.cloudera.flume.conf.thrift.FlumeNodeState.ERROR,
-//        MasterClientServerThrift.stateToThrift(StatusManager.NodeState.ERROR));
-//    assertEquals(com.cloudera.flume.conf.thrift.FlumeNodeState.IDLE,
-//        MasterClientServerThrift.stateToThrift(StatusManager.NodeState.IDLE));
-//    // TODO OPENING==CONFIGURING, to preserve Thrift compatibility
-//    assertEquals(com.cloudera.flume.conf.thrift.FlumeNodeState.CONFIGURING,
-//        MasterClientServerThrift.stateToThrift(StatusManager.NodeState.OPENING));
 
     // AVRO NODE STATE
     assertEquals(StatusManager.NodeState.HELLO,

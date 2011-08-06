@@ -28,7 +28,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.apache.thrift.transport.TTransportException;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -256,7 +255,7 @@ public class TestFlumeNode {
    * reconnect
    */
   @Test
-  public void testFlumeNodeReconnect() throws TTransportException, IOException,
+  public void testFlumeNodeReconnect() throws IOException,
       InterruptedException {
 
     FlumeConfiguration cfg = FlumeConfiguration.createTestableConfiguration();

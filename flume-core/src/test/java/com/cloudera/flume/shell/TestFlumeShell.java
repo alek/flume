@@ -34,7 +34,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 
-import org.apache.thrift.transport.TTransportException;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -68,7 +67,7 @@ public class TestFlumeShell extends SetupMasterTestEnv {
    */
   @Test
   public void testConnectConfig() throws InterruptedException,
-      TTransportException, IOException {
+      IOException {
     assertEquals(0, flumeMaster.getSpecMan().getAllConfigs().size());
 
     FlumeShell sh = new FlumeShell();
@@ -87,7 +86,7 @@ public class TestFlumeShell extends SetupMasterTestEnv {
    */
   @Test
   public void testSetChokeLimit() throws InterruptedException,
-      TTransportException, IOException {
+      IOException {
 
     FlumeShell sh = new FlumeShell();
 
@@ -106,7 +105,7 @@ public class TestFlumeShell extends SetupMasterTestEnv {
    */
   @Test
   public void testConnectMultiConfig() throws InterruptedException,
-      TTransportException, IOException {
+      IOException {
     assertEquals(0, flumeMaster.getSpecMan().getAllConfigs().size());
 
     FlumeShell sh = new FlumeShell();
@@ -231,7 +230,7 @@ public class TestFlumeShell extends SetupMasterTestEnv {
    */
   @Test
   public void testCommitTimeOut() throws InterruptedException,
-      TTransportException, IOException {
+       IOException {
     assertEquals(0, flumeMaster.getSpecMan().getAllConfigs().size());
 
     FlumeShell sh = new FlumeShell();
@@ -253,7 +252,7 @@ public class TestFlumeShell extends SetupMasterTestEnv {
    */
   @Test
   public void testSubmitWait() throws InterruptedException,
-      TTransportException, IOException {
+       IOException {
     assertEquals(0, flumeMaster.getSpecMan().getAllConfigs().size());
 
     FlumeShell sh = new FlumeShell();
@@ -279,7 +278,7 @@ public class TestFlumeShell extends SetupMasterTestEnv {
    * config has finished.
    */
   @Test
-  public void testNodesDone() throws InterruptedException, TTransportException,
+  public void testNodesDone() throws InterruptedException,
       IOException {
     assertEquals(0, flumeMaster.getSpecMan().getAllConfigs().size());
 
@@ -324,7 +323,7 @@ public class TestFlumeShell extends SetupMasterTestEnv {
   @Test
   @Ignore("Can't get a handle to the countersink, must fix")
   public void test3NodesDone() throws InterruptedException,
-      TTransportException, IOException {
+      IOException {
     assertEquals(0, flumeMaster.getSpecMan().getAllConfigs().size());
 
     String nodename = "foo";
@@ -393,7 +392,7 @@ public class TestFlumeShell extends SetupMasterTestEnv {
   @Test
   @Ignore("Can't get a handle to the countersink, must fix")
   public void testNodesActive() throws InterruptedException,
-      TTransportException, IOException {
+       IOException {
     assertEquals(0, flumeMaster.getSpecMan().getAllConfigs().size());
 
     String nodename = "foo";
@@ -474,7 +473,7 @@ public class TestFlumeShell extends SetupMasterTestEnv {
    * heartbeat, fake a few more heartbeats, purge all the heartbeats
    */
   @Test
-  public void testPurge() throws InterruptedException, TTransportException,
+  public void testPurge() throws InterruptedException,
       IOException {
     assertEquals(0, flumeMaster.getSpecMan().getAllConfigs().size());
 

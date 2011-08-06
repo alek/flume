@@ -52,8 +52,6 @@ public class MasterAdminServer {
     this.stubServer = null;
     if (FlumeConfiguration.RPC_TYPE_AVRO.equals(rpcType)) {
       stubServer = new MasterAdminServerAvro(this);
-    } else if (FlumeConfiguration.RPC_TYPE_THRIFT.equals(rpcType)) {
-      stubServer = new MasterAdminServerThrift(this);
     } else {
       throw new IOException("No valid RPC framework specified in config");
     }

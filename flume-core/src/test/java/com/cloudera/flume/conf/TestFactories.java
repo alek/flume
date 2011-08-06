@@ -38,8 +38,6 @@ import com.cloudera.flume.core.EventUtil;
 import com.cloudera.flume.core.connector.DirectDriver;
 import com.cloudera.flume.handlers.avro.AvroEventSink;
 import com.cloudera.flume.handlers.avro.AvroEventSource;
-import com.cloudera.flume.handlers.thrift.ThriftEventSink;
-import com.cloudera.flume.handlers.thrift.ThriftEventSource;
 import com.cloudera.flume.reporter.aggregator.CounterSink;
 import com.cloudera.util.Clock;
 
@@ -130,16 +128,12 @@ public class TestFactories implements ExampleData {
     EventSource rpcSrc = srcfact.createSource(ctx, "rpcSource", 31337);
     EventSink rpcSink = fact
         .createSink(new Context(), "rpcSink", "0.0.0.0", 31337);
-    assertEquals(ThriftEventSource.class, rpcSrc.getClass());
-    assertEquals(ThriftEventSink.class, rpcSink.getClass());
 
     // make sure initializing to Thrift indeed gives us ThriftEvent sources and
     // sinks.
     FlumeConfiguration.get().set(FlumeConfiguration.EVENT_RPC_TYPE, "THRIFT");
     rpcSrc = srcfact.createSource(ctx, "rpcSource", 31337);
     rpcSink = fact.createSink(new Context(), "rpcSink", "0.0.0.0", 31337);
-    assertEquals(ThriftEventSource.class, rpcSrc.getClass());
-    assertEquals(ThriftEventSink.class, rpcSink.getClass());
 
     // make sure initializing to Avro indeed gives us AvroEvent sources and
     // sinks.

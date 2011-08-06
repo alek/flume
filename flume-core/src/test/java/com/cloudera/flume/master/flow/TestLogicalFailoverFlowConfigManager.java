@@ -25,7 +25,6 @@ import java.util.Map;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.apache.thrift.transport.TTransportException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -74,7 +73,7 @@ public class TestLogicalFailoverFlowConfigManager {
    * process/jvm.
    * */
   @Before
-  public void setCfgAndStartMaster() throws TTransportException, IOException,
+  public void setCfgAndStartMaster() throws IOException,
       FlumeSpecException {
     // Give ZK a temporary directory, otherwise it's possible we'll reload some
     // old configs

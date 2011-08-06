@@ -30,7 +30,6 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.apache.thrift.TException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -282,7 +281,7 @@ public class TestAvroSinks implements ExampleData {
   }
 
   @Test
-  public void testTruncate() throws TException, InterruptedException,
+  public void testTruncate() throws InterruptedException,
       FlumeSpecException, IOException {
     final AvroEventSource src = (AvroEventSource) FlumeBuilder.buildSource(
         LogicalNodeContext.testingContext(), "avroSource(1234,truncate=true)");

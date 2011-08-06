@@ -25,7 +25,6 @@ import com.cloudera.flume.conf.FlumeConfiguration;
 import com.cloudera.flume.conf.SinkFactory.SinkBuilder;
 import com.cloudera.flume.core.EventSink;
 import com.cloudera.flume.handlers.avro.AvroEventSink;
-import com.cloudera.flume.handlers.thrift.ThriftEventSink;
 
 /**
  * This is a sink that is used to send events through an RPC, it either uses
@@ -61,16 +60,12 @@ public class RpcSink extends EventSink.Base {
          * FlumeConfiguration is all set.
          */
         if (FlumeConfiguration.get().getEventRPC().equals(
-            FlumeConfiguration.RPC_TYPE_THRIFT)) {
-          return new ThriftEventSink(host, port);
-        }
-        if (FlumeConfiguration.get().getEventRPC().equals(
             FlumeConfiguration.RPC_TYPE_AVRO)) {
           return new AvroEventSink(host, port);
         }
         LOG.warn("event.rpc.type not defined.  It should be either"
             + " \"THRIFT\" or \"AVRO\". Defaulting to Thrift");
-        return new ThriftEventSink(host, port);
+        return new AvroEventSink(host, port);
       }
     };
   }

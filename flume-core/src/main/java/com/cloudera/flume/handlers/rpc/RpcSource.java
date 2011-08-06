@@ -26,7 +26,6 @@ import com.cloudera.flume.conf.SourceFactory.SourceBuilder;
 import com.cloudera.flume.core.EventSink;
 import com.cloudera.flume.core.EventSource;
 import com.cloudera.flume.handlers.avro.AvroEventSource;
-import com.cloudera.flume.handlers.thrift.ThriftEventSource;
 import com.google.common.base.Preconditions;
 
 /**
@@ -52,16 +51,12 @@ public class RpcSource extends EventSink.Base {
          * FlumeConfiguration is all set.
          */
         if (FlumeConfiguration.get().getEventRPC().equals(
-            FlumeConfiguration.RPC_TYPE_THRIFT)) {
-          return new ThriftEventSource(port);
-        }
-        if (FlumeConfiguration.get().getEventRPC().equals(
             FlumeConfiguration.RPC_TYPE_AVRO)) {
           return new AvroEventSource(port);
         }
         LOG.warn("event.rpc.type not defined.  It should be either "
             + "\"THRIFT\" or \"AVRO\". Defaulting to Thrift");
-        return new ThriftEventSource(port);
+        return new AvroEventSource(port);
       }
     };
   }

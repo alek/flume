@@ -19,7 +19,6 @@ package com.cloudera.flume.agent;
 
 import java.io.IOException;
 
-import org.apache.thrift.TException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -40,7 +39,7 @@ public class TestAcks {
 
   // check that agents properly manage a list of outstanding acks
   @Test
-  public void testAckAgent() throws IOException, TException,
+  public void testAckAgent() throws IOException,
       InterruptedException {
     // mock master rpc interface
     MockMasterRPC svr = new MockMasterRPC();
@@ -85,7 +84,7 @@ public class TestAcks {
   // check that collectors/receivers properly notify master of received complete
   // acks.
   @Test
-  public void testAckAgentCollector() throws IOException, TException,
+  public void testAckAgentCollector() throws IOException,
       InterruptedException {
     // mock master rpc interface
     MockMasterRPC svr = new MockMasterRPC();

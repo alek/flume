@@ -11,7 +11,9 @@
   <properties>
     <!-- NB: The version of the thrift compiler must match that of the dependency 
       on the jar file below. -->
-    <thrift.executable>${env.THRIFT_HOME}/bin/thrift</thrift.executable>
+    <!--<thrift.executable>${env.THRIFT_HOME}/bin/thrift</thrift.executable>-->
+
+      <!--<thrift.executable>/usr/local/bin/thrift</thrift.executable>-->
 
     <!-- Set default encoding to UTF-8 to remove maven complaints -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -37,7 +39,6 @@
         <module>flume-distribution</module>
         <module>flume-log4j-appender</module>
         <module>plugins/flume-plugin-helloworld</module>
-        <module>plugins/flume-plugin-hbasesink</module>
       </modules>
     </profile>
 
@@ -54,7 +55,6 @@
         <module>flume-distribution</module>
         <module>flume-log4j-appender</module>
         <module>plugins/flume-plugin-helloworld</module>
-        <module>plugins/flume-plugin-hbasesink</module>
       </modules>
     </profile>
 
@@ -519,11 +519,11 @@
 
       <!-- FIXME: Using a Cloudera-packaged version of thrift 0.5.0 because 
         it can't be found in a public repo. -esammer -->
-      <dependency>
-        <groupId>org.apache.thrift</groupId>
-        <artifactId>libthrift</artifactId>
-        <version>0.6.0-cdh</version>
-      </dependency>
+      <!--<dependency>-->
+        <!--<groupId>org.apache.thrift</groupId>-->
+        <!--<artifactId>libthrift</artifactId>-->
+        <!--<version>0.6.0-cdh</version>-->
+      <!--</dependency>-->
 
       <dependency>
         <groupId>org.apache.avro</groupId>

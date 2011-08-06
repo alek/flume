@@ -23,7 +23,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.thrift.transport.TTransportException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -106,9 +105,7 @@ public class MultiMasterRPC implements MasterRPC {
         // point, so to be safe force a close.
         close();
         MasterRPC out = null;
-        if (FlumeConfiguration.RPC_TYPE_THRIFT.equals(rpcProtocol)) {
-          out = new ThriftMasterRPC(host.getLeft(), host.getRight());
-        } else if (FlumeConfiguration.RPC_TYPE_AVRO.equals(rpcProtocol)) {
+        if (FlumeConfiguration.RPC_TYPE_AVRO.equals(rpcProtocol)) {
           out = new AvroMasterRPC(host.getLeft(), host.getRight());
         } else {
           LOG.error("No valid RPC protocol in configurations.");
@@ -130,7 +127,7 @@ public class MultiMasterRPC implements MasterRPC {
   }
 
   protected synchronized MasterRPC ensureConnected()
-      throws TTransportException, IOException {
+      throws IOException {
     return (masterRPC != null) ? masterRPC : findServer();
   }
 

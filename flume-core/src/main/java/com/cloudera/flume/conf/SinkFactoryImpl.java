@@ -75,7 +75,6 @@ import com.cloudera.flume.handlers.hdfs.SeqfileEventSink;
 import com.cloudera.flume.handlers.irc.IrcSink;
 import com.cloudera.flume.handlers.rpc.RpcSink;
 import com.cloudera.flume.handlers.syslog.SyslogTcpSink;
-import com.cloudera.flume.handlers.thrift.ThriftEventSink;
 import com.cloudera.flume.master.availability.FailoverChainSink;
 import com.cloudera.flume.reporter.aggregator.AccumulatorSink;
 import com.cloudera.flume.reporter.aggregator.CounterSink;
@@ -137,7 +136,6 @@ public class SinkFactoryImpl extends SinkFactory {
       // ThriftEventSink
       { "syslogTcp", SyslogTcpSink.builder() },
       { "irc", IrcSink.builder() },
-      { "thriftSink", ThriftEventSink.builder() },
       { "avroSink", AvroEventSink.builder() },
       // advanced
       { "failChain", FailoverChainSink.builder() }, // @deprecated

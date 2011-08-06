@@ -24,7 +24,6 @@ import static org.junit.Assert.assertNull;
 
 import java.io.IOException;
 
-import org.apache.thrift.transport.TTransportException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -336,7 +335,7 @@ public class TestLogicalNodeMapping {
    */
   @Test
   public void testZKMasterDecomission() throws IOException,
-      TTransportException, InterruptedException {
+      InterruptedException {
     // use the simple command manger, non-gossip ackmanager
     cfg.set(FlumeConfiguration.MASTER_STORE, "zookeeper");
     master = new FlumeMaster(new CommandManager(), new ConfigManager(),
@@ -359,7 +358,7 @@ public class TestLogicalNodeMapping {
   }
 
   @Test
-  public void testZKUnmapLogicalNode() throws IOException, TTransportException,
+  public void testZKUnmapLogicalNode() throws IOException,
       InterruptedException {
     // use the simple command manger, non-gossip ackmanager
     cfg.set(FlumeConfiguration.MASTER_STORE, "zookeeper");
@@ -419,7 +418,7 @@ public class TestLogicalNodeMapping {
 
   @Test
   public void testZKRemoveLogicalNode() throws IOException, FlumeSpecException,
-      TTransportException, InterruptedException {
+      InterruptedException {
     // use the simple command manger, non-gossip ackmanager
     cfg.set(FlumeConfiguration.MASTER_STORE, "zookeeper");
 
